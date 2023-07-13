@@ -1,16 +1,8 @@
 {
   "books": [
     {
-      "title": "hossam",
-      "id": 1
-    },
-    {
-      "title": "wow",
+      "title": "harry potter the half blood",
       "id": 2
-    },
-    {
-      "title": "hossamelgamed",
-      "id": 3
     }
   ]
 }
