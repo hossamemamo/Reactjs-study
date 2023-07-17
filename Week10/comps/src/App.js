@@ -1,29 +1,23 @@
-import Accordion from './components/Accordion';
+import Dropdown from './components/Dropdown';
+import {useState} from 'react';
 function App() {
+  const [selection,setSelection]=useState(null);
 
+  const handleSelect =(option)=>{
+    setSelection(option);
+  };
 
-  const items=[
-    {
-      id:'asdasd',
-      label:'Can I use React on a project?',
-      content:'You can use React on any project you want!!'
-    },
-    {
-      id:'ghfgh',
-      label:'Can I use Java on a project?',
-      content:'You can use React on any project you want!!'
-    },
-    {
-      id:'vcvcv',
-      label:'Can I use CSS on a project?',
-      content:'You can use React on any project you want!!'
-    },
+  const options = [
+    { label: 'Red', value: 'red' },
+    { label: 'Green', value: 'green' },
+    { label: 'Blue', value: 'blue' },
   ];
-  return (
-    <div>
-    <Accordion items={items}/>
-    </div>
- );
+
+  return (<div className='flex'>
+    <Dropdown  value={selection} onChange={handleSelect} options={options} />
+    <Dropdown  value={selection} onChange={handleSelect} options={options} />
+
+    </div>);
 }
 
 export default App;
