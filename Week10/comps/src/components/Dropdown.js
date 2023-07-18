@@ -1,10 +1,33 @@
-import {useState} from 'react';
+import {useState ,useEffect,useRef} from 'react';
 import Panel from './Panel';
 import {GoChevronDown} from 'react-icons/go';
 
 function Dropdown({ options,onChange,value }) {
 
   const [isOpen,setIsOpen]=useState(false);
+  const divEl = useRef();
+
+
+  useEffect(()=>{
+    const handler = (event) =>{
+
+      if(!divEl.current)
+      {
+        return;
+      }//this is added in alot of professional projects
+
+      if (!divEl.current.contains(event.target)){//if it's true then user clicked inside
+        setIsOpen(false);
+      }
+
+    };
+    document.addEventListener('click',handler,true);
+
+    return ()=>{
+      document.removeEventListener('click',handler);//clean up function
+    };
+  },[]);
+
 
   const handleClick = (openState)=>{
     setIsOpen((currentIsOpen)=>{ return !openState;});
@@ -22,7 +45,7 @@ function Dropdown({ options,onChange,value }) {
 
 
 
-  return (<div className='w-48 relative'>
+  return (<div ref={divEl} className='w-48 relative'>
     <Panel className='flex justify-between items-center cursor-pointer'onClick={()=>{handleClick(isOpen)}}>
       {value?.label || 'Select...'}<GoChevronDown className='text-lg'/>
       </Panel>
